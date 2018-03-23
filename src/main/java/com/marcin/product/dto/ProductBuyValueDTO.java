@@ -21,4 +21,5 @@ public class ProductBuyValueDTO {
 		return "ProductBuyValueDTO [productName=" + productName + ", toBuyValue=" + toBuyValue + "]";
 	}
 	//nowa linia
+	
 }
