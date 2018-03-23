@@ -18,7 +18,7 @@ public class ProductBuyValueDTO {
 	}
 	@Override
 	public String toString() {
-		return "ProductBuyValueDTO [productName=" + productName + ", toBuyValue=" + toBuyValue + "]";
+		return "ProductBuyValueDTO [productName=" + productName + ", toBuyValue=" + toBuyValue + "] ";
 	}
 	//nowa linia
 	
