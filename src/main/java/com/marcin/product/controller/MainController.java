@@ -17,15 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.marcin.product.dao.ProductDAO;
 import com.marcin.product.entity.Product;
 import com.marcin.product.service.ProductService;
 
 @Controller
 public class MainController {
-
-	@Autowired
-	private ProductDAO productDAO;
 	
 	@Autowired
 	private ProductService productService;
@@ -43,7 +39,7 @@ public class MainController {
 	
 	@GetMapping("/showList")
 	public String showListView(Model theModel) {
-		List<Product> theProduct = productDAO.getProductList();
+		List<Product> theProduct = productService.getProductList();
 		theModel.addAttribute("products", theProduct);
 		return "show-list";
 	}
@@ -61,41 +57,35 @@ public class MainController {
 			theModel.addAttribute("formerrors", result.getAllErrors());
 			return "product-form";
 		} else {
-			productDAO.saveProduct(registerProduct);
+			productService.saveProduct(registerProduct);
 			return "redirect:/showList";
 		}
 	}
 	
 	@GetMapping("/buyList")
 	public String showBuyList(Model theModel) {
-		List<Product> theProduct = productDAO.showBuyList();
-		theModel.addAttribute("buyProducts", theProduct);
+		theModel.addAttribute("productToBuy", productService.toBuyValue());
 		return "buy-list";
 	}
 	
 	@GetMapping("/updateProduct")
 	public String updateProduct(@RequestParam("updateId") int theId, Model theModel) {
-		Product theProduct = productDAO.updateProduct(theId);
+		Product theProduct = productService.updateProduct(theId);
 		theModel.addAttribute("addProduct", theProduct);
 		return "product-form";
 	}
 	
 	@GetMapping("/deleteProduct")
 	public String deleteProduct(@RequestParam("deleteId") int theId) {
-		productDAO.deleteProduct(theId);
+		productService.deleteProduct(theId);
 		return "redirect:/showList";
 	}
 	
 	@RequestMapping("/setMaxVal")
 	public String setMaxStatus(@RequestParam("setMaxStatus") int theId, Model theModel) {
-		Product theProduct = productDAO.setMax(theId);
+		Product theProduct = productService.setMax(theId);
 		theModel.addAttribute("setMaxStatus", theProduct);
 		return "redirect:/buyList";
 	}
 	
-	@GetMapping("/toBuyValue")
-	public String toBuyValue(Model theModel) {
-		theModel.addAttribute("productToBuy", productService.toBuyValue());
-		return "toBuyValue";
-	}
 }
