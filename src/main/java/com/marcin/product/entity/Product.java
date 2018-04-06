@@ -10,7 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.marcin.product.validation.FieldsVerification;
 
@@ -24,16 +27,18 @@ public class Product {
 	@Column(name="id")
 	private int id;
 	
-	@Size(min=2, message="* requires at least 2 characters")
+	@NotBlank
+	@Size(min=2, message="Product name requires at least 2 characters")
+	@Pattern(regexp="^[a-zA-Z0-9 ]*$", message="Must only contain letters / digits")		//^[A-Za-z ][A-Za-z0-9!@#$%^&* ]*$
 	@Column(name="product_name")
 	private String productName;
 	
 
-	@Min(value=1, message="* must be at least 1")
+	@Min(value=1, message="Quantity needed must be at least 1")
 	@Column(name="quantity_needed")
 	private Integer quantityNeeded;
 	
-	@Min(value=0, message="* must be a positive value")
+	@Min(value=0, message="Status must be at least 0")
 	@Column(name="status")
 	private Integer status;
 

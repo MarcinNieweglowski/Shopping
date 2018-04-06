@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.desc {
+	overflow: hidden;
+ 	max-height: 0;
+	transition: max-height 0.5s ease-out;
+}
+.desc:hover {
+ 	max-height: 1000;
+	transition: max-height 1.5s ease-in;
+}
+

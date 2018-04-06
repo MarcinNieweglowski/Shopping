@@ -44,7 +44,8 @@ public class ProductConfigClass implements WebMvcConfigurer {
 	//sets a default view name
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("main");
+		registry.addViewController("/").setViewName("main");	//login-page
+		registry.addViewController("/verifyUserData").setViewName("main");
 	}
 	
 	@Autowired
@@ -121,6 +122,8 @@ public class ProductConfigClass implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/js/", "/resources/css/");
+//		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/css/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
 	}
     

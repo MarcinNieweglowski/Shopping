@@ -11,7 +11,7 @@ public interface ProductService {
 	public List<Product> getProductList();
 	
 	// add a new product
-	public void saveProduct(Product theProduct);
+	public void saveProduct(Product theProduct)/* throws ProductExistsException*/;
 	
 	// update a given product
 	public Product updateProduct(int theId);
@@ -27,5 +27,7 @@ public interface ProductService {
 	
 	// calculate the value needed to buy (of a given product)
 	public List<ProductBuyValueDTO> toBuyValue();
-	
+
+	// check if a given product already exists in the database
+	//public boolean productExistsException(String prodName);
 }

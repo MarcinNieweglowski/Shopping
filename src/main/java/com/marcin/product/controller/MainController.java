@@ -54,13 +54,23 @@ public class MainController {
 	@PostMapping("/confirmProduct")
 	public String confirmProduct(@Valid @ModelAttribute("addProduct") Product registerProduct, BindingResult result, Model theModel) {
 		if(result.hasErrors()) {
-			theModel.addAttribute("formerrors", result.getAllErrors());
+			theModel.addAttribute("formerrors", result.getAllErrors()); // CHECK IT!
+			//System.out.println("\nTHE ERRORS ARE: " + result);
 			return "product-form";
 		} else {
 			productService.saveProduct(registerProduct);
 			return "redirect:/showList";
 		}
 	}
+	
+/*	private Product createNewProduct(Product product, BindingResult result) {
+		Product newProduct = null;
+		try {
+			newProduct = productService.saveProduct(product);
+		} catch (ProductExistsException exc) {
+			return null;
+		}
+	}*/
 	
 	@GetMapping("/buyList")
 	public String showBuyList(Model theModel) {

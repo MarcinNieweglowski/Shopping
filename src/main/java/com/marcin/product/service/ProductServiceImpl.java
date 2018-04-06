@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.marcin.product.dao.ProductDAO;
 import com.marcin.product.dto.ProductBuyValueDTO;
+import com.marcin.product.dto.ProductDuplicationDTO;
 import com.marcin.product.entity.Product;
 
 @Service
@@ -25,7 +26,10 @@ public class ProductServiceImpl implements ProductService {
 
 	@Transactional
 	@Override
-	public void saveProduct(Product theProduct) {
+	public void saveProduct(Product theProduct)/* throws ProductExistsException */{
+//		if(productDoesNotExist(theProduct.getProductName())) 
+//			throw new ProductExistsException ("This product already exists in the database!");
+//			}
 		productDAO.saveProduct(theProduct);
 	}
 
@@ -57,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductBuyValueDTO> toBuyValue() {
 		List<ProductBuyValueDTO> results = new ArrayList<>();
-		for (Product item: productDAO.showBuyList()) {
+		for (Product item : productDAO.showBuyList()) {
 			ProductBuyValueDTO dto = new ProductBuyValueDTO();
 			dto.setId(item.getId());
 			dto.setProductName(item.getProductName());
@@ -67,4 +71,17 @@ public class ProductServiceImpl implements ProductService {
 		
 		return results;
 	}
+
+	@Transactional
+//	@Override
+	public boolean productDoesNotExist(String prodName) {	//true means the product CAN be added to the database, false -> product already exists
+		for (Product item : productDAO.showBuyList()) {
+			ProductDuplicationDTO  dto = new ProductDuplicationDTO();
+			dto.setProductName(item.getProductName());
+			if(dto.getProductName().equals(prodName))
+				return false;
+		}
+		return true;
+	}
+
 }

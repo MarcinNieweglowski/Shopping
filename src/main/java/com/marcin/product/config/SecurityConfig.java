@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 
 @Configuration
 @EnableWebSecurity
@@ -21,11 +23,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.jdbcAuthentication().dataSource(dataSource)
 		.usersByUsernameQuery("select app_username as login, user_password as password, true as enabled from app_user where app_username=?")
         .authoritiesByUsernameQuery("select app_username as login, authority as 'ROLE_USER' from app_user where app_username=?");
+//		UserBuilder users = User.withDefaultPasswordEncoder();
+//		auth.inMemoryAuthentication()
+//		.withUser(users.username("marcin").password("pass").roles("USER"));
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/","/login","/registerUser").permitAll().and().formLogin().loginPage("/login");
+//		http.authorizeRequests().antMatchers("/","/loginForm").permitAll().and().formLogin().loginPage("/loginForm");
 //		http.authorizeRequests().anyRequest().authenticated()
 //			.and().formLogin()
 //			.loginPage("/loginForm")
