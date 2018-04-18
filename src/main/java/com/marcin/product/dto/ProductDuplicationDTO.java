@@ -2,19 +2,28 @@ package com.marcin.product.dto;
 
 public class ProductDuplicationDTO {
 
-	private String productName;
-
-	public String getProductName() {
-		return productName;
+	private int existingProductId;
+	private String existingProductName;
+	
+	public int getExistingProductId() {
+		return existingProductId;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setExistingProductId(int existingProductId) {
+		this.existingProductId = existingProductId;
+	}
+
+	public String getExistingProductName() {
+		return existingProductName;
+	}
+
+	public void setExistingProductName(String existingProductName) {
+		this.existingProductName = existingProductName;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductDuplicationDTO [productName=" + productName + "]";
+		return "ProductDuplicationDTO [existingProductId=" + existingProductId + ", existingProductName=" + existingProductName + "]";
 	}
 	
 }

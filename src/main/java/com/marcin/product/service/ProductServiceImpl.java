@@ -26,11 +26,10 @@ public class ProductServiceImpl implements ProductService {
 
 	@Transactional
 	@Override
-	public void saveProduct(Product theProduct)/* throws ProductExistsException */{
-//		if(productDoesNotExist(theProduct.getProductName())) 
-//			throw new ProductExistsException ("This product already exists in the database!");
-//			}
-		productDAO.saveProduct(theProduct);
+	public void saveProduct(Product theProduct){
+		if (productDoesNotExist(theProduct.getId(), theProduct.getProductName())) {	//true - product CAN be added, false - already exists
+			productDAO.saveProduct(theProduct);
+		}
 	}
 
 	@Transactional
@@ -74,12 +73,24 @@ public class ProductServiceImpl implements ProductService {
 
 	@Transactional
 //	@Override
-	public boolean productDoesNotExist(String prodName) {	//true means the product CAN be added to the database, false -> product already exists
-		for (Product item : productDAO.showBuyList()) {
-			ProductDuplicationDTO  dto = new ProductDuplicationDTO();
-			dto.setProductName(item.getProductName());
-			if(dto.getProductName().equals(prodName))
+	public boolean productDoesNotExist(int newId, String newProductName) {	//true - product CAN be added, false - already exists
+		String existingProductName;
+		int existingProductId;
+		
+		newProductName = newProductName.toLowerCase();
+		
+		for (Product item : productDAO.getProductList()) {
+			ProductDuplicationDTO duplicatedProduct = new ProductDuplicationDTO();
+			
+			duplicatedProduct.setExistingProductId(item.getId());
+			existingProductId = duplicatedProduct.getExistingProductId();
+			
+			duplicatedProduct.setExistingProductName(item.getProductName());
+			existingProductName = duplicatedProduct.getExistingProductName().toLowerCase();
+			
+			if (existingProductId != newId && existingProductName.equals(newProductName)) {	// equal ids -> updating an existing product
 				return false;
+			}
 		}
 		return true;
 	}

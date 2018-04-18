@@ -29,5 +29,5 @@ public interface ProductService {
 	public List<ProductBuyValueDTO> toBuyValue();
 
 	// check if a given product already exists in the database
-	//public boolean productExistsException(String prodName);
+	public boolean productDoesNotExist(int newId, String newProductName);
 }

@@ -34,7 +34,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void saveProduct(Product theProduct) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		currentSession.saveOrUpdate(theProduct);
+		currentSession.merge(theProduct);	//saveOrUpdate causes org.hibernate.NonUniqueObjectException !
 		
 	}
 	
