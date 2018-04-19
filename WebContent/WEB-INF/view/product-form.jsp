@@ -70,11 +70,12 @@
 			</label>
 			<br>
 			
+			<c:if test="${not empty isInvalidName}">
+				<div align="center"><i><b>Error : ${isInvalidName}</b></i></div>
+			</c:if>
+			
 			<c:if test="${formerrors ne null}">
-				<div align="center"><i><b>Warning: error(s) found!</b></i></div>
-<%-- 				<form:errors path="productName"/><br> --%>
-<%-- 				<form:errors path="quantityNeeded"/><br> --%>
-<%-- 				<form:errors path="status"/><br><br> --%>
+				<div align="center"><i><b>Error : Correct the input field(s)!</b></i></div>
 			</c:if>
 			
 			<input type="submit" value="Confirm!" class="btn btn-success"/>

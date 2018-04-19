@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Transactional
-//	@Override
+	@Override
 	public boolean productDoesNotExist(int newId, String newProductName) {	//true - product CAN be added, false - already exists
 		String existingProductName;
 		int existingProductId;

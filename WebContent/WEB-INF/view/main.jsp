@@ -34,6 +34,7 @@
 		</div>
 	</nav>
 	<h2 align="center">Welcome User</h2>
+	<h3 align="center">The time is <%= new java.util.Date() %></h3>
 	<div align="center">
 		<h6><i>Hover to see more details</i></h6>
 		<div class="desc" style="width:600px">

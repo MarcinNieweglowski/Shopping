@@ -53,24 +53,18 @@ public class MainController {
 	
 	@PostMapping("/confirmProduct")
 	public String confirmProduct(@Valid @ModelAttribute("addProduct") Product registerProduct, BindingResult result, Model theModel) {
+		boolean isValidName = productService.productDoesNotExist(registerProduct.getId(), registerProduct.getProductName());
 		if(result.hasErrors()) {
-			theModel.addAttribute("formerrors", result.getAllErrors()); // CHECK IT!
-			//System.out.println("\nTHE ERRORS ARE: " + result);
+			theModel.addAttribute("formerrors", result.getAllErrors()); // to avoid HTTP Status 500 - Internal Server Error
+			return "product-form";
+		} else if (!isValidName) {
+			theModel.addAttribute("isInvalidName", "A product with this name already exists. Duplicate entries are not allowed.");
 			return "product-form";
 		} else {
 			productService.saveProduct(registerProduct);
 			return "redirect:/showList";
 		}
 	}
-	
-/*	private Product createNewProduct(Product product, BindingResult result) {
-		Product newProduct = null;
-		try {
-			newProduct = productService.saveProduct(product);
-		} catch (ProductExistsException exc) {
-			return null;
-		}
-	}*/
 	
 	@GetMapping("/buyList")
 	public String showBuyList(Model theModel) {
