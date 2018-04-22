@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+/* color of the navbar */
+.navbar {
+	background-color: #c0c0c0;
+	
+}
+
+/* logout and time style */
+.nav.navbar-nav.navbar-right li a {
+	color: black !important;
+	font-weight: bold;
+	font-style: italic;
+}
+
+/* logout hover style */
+.navbar .navbar-brand, .nav.navbar-nav.navbar-right li#logoutBtn a {
+	transition: 0.5s;
+}
+.navbar:hover .navbar-brand:hover, .nav.navbar-nav.navbar-right li#logoutBtn a:hover {
+	color: white !important;
+	background-color: #000000;
+	opacity: 0.7;
+}
+
+/* home, show all products, add new product, show buy list data - buttons hover effect */
+.naviButton {
+	transition: 0.5s ease;
+}
+.naviButton:hover {
+	background-color: #c0c0c0;
+}
+
+/* GitHub link button styling */
+.navbar-brand {
+	color: #33ccff !important;
+	font-weight: bold;
+	font-style: italic;
+}

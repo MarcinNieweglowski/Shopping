@@ -3,7 +3,7 @@
 input:not([type="submit"]) + .input-requirements {
 	overflow: hidden;	/*visibility of the area -> for example: to add scrolls to show the rest of the text*/
 	max-height: 0;
-	transition: max-height 0.5s ease-out;  <%--ease out means how long after exiting the input field will the js validation remain visible --%>
+	transition: max-height 0.5s ease-out;  <%-- ease out means how long after exiting the input field will the js validation remain visible --%>
 }
 input:not([type="submit"]):hover + .input-requirements,
 input:not([type="submit"]):focus + .input-requirements,
