@@ -36,7 +36,7 @@ var productNameValidityChecks = [
 	},
 	{
 		isInvalid: function(input) {
-			var illegalChars = input.value.match(/[^a-zA-Z0-9, ]/g);	// space is also allowed
+			var illegalChars = input.value.match(/[^a-zA-Z0-9 ]/g);	// space is also allowed
 			return ( illegalChars || input.value == "" ) ? true : false;
 		},
 		element: document.querySelector("label[for='productName'] li:nth-child(2)")

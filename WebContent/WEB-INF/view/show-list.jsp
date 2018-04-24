@@ -4,7 +4,7 @@
 	<div class="container">
 		<h2>Showing the list of all products in the database</h2>
 		<hr>
-		<table class="table table-striped table-hover">
+		<table class="table table-striped table-hover table-bordered">
 			<tr>
 				<th>Product name</th>
 				<th>Quantity needed</th>

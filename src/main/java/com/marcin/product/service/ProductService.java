@@ -7,16 +7,9 @@ import com.marcin.product.entity.Product;
 
 public interface ProductService {
 	
-	// list of all products
 	public List<Product> getProductList();
-	
-	// add a new product
-	public void saveProduct(Product theProduct)/* throws ProductExistsException*/;
-	
-	// update a given product
+	public void saveProduct(Product theProduct);
 	public Product updateProduct(int theId);
-	
-	// delete a given product
 	public void deleteProduct(int theId);
 	
 	//show the list of items (status < needed value)
@@ -30,4 +23,7 @@ public interface ProductService {
 
 	// check if a given product already exists in the database
 	public boolean productDoesNotExist(int newId, String newProductName);
+	public boolean productDoesNotExist(String newProductName);
+	// search the database to find the exact product
+	public Product findProductInDatabaseForSearchMethod(Product searchProduct);
 }

@@ -12,4 +12,5 @@ public interface ProductDAO {
 	public void deleteProduct(int theId);
 	public List<Product> showBuyList();
 	public Product setMax(int theId);
+//	public Product searchProduct(String productName);
 }

@@ -4,7 +4,7 @@
 	<div class="containter regist">
 		<h2 class="header-info"><i>Adding a new product to the database</i></h2>
 		<br>
-		<div align="center">
+		<div class="centerDiv">
 		<form:form modelAttribute="addProduct" action="confirmProduct" method="POST" id="registration">
 			<form:hidden path="id" />
 			
@@ -47,9 +47,10 @@
 				<div align="center"><i><b>Error : Correct the input field(s)!</b></i></div>
 			</c:if>
 			
-			<input type="submit" value="Confirm!" class="btn btn-success"/>
+			<input type="submit" value="Confirm" class="btn btn-success"/>
 			</form:form>
 		</div>
 	</div>
 	
+	<script src="${formJS}" type="text/javascript" ></script>
 	<%@ include file="common/footer.jsp" %>

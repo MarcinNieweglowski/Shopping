@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.marcin.product.dao.ProductDAO;
 import com.marcin.product.dto.ProductBuyValueDTO;
 import com.marcin.product.dto.ProductDuplicationDTO;
+import com.marcin.product.dto.SearchProductDTO;
 import com.marcin.product.entity.Product;
 
 @Service
@@ -67,13 +68,12 @@ public class ProductServiceImpl implements ProductService {
 			dto.setToBuyValue(item.getQuantityNeeded()-item.getStatus());
 			results.add(dto);
 		}
-		
 		return results;
 	}
 
 	@Transactional
 	@Override
-	public boolean productDoesNotExist(int newId, String newProductName) {	//true - product CAN be added, false - already exists
+	public boolean productDoesNotExist(int newId, String newProductName) {	//true - product not in DB / CAN be added, false - already exists
 		String existingProductName;
 		int existingProductId;
 		
@@ -94,5 +94,40 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return true;
 	}
+	
+	@Transactional
+	@Override
+	public boolean productDoesNotExist(String newProductName) {	//true - product not in DB / CAN be added, false - already exists
+		String searchNameInDatabase;
+		newProductName = newProductName.toLowerCase();
+		
+		for (Product item : productDAO.getProductList()) {
+			SearchProductDTO searchProductDTO = new SearchProductDTO();
+			searchProductDTO.setSearchName(item.getProductName());
+			searchNameInDatabase = searchProductDTO.getSearchName().toLowerCase();
+			
+			if (searchNameInDatabase.equals(newProductName)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
+	@Transactional
+	@Override
+	public Product findProductInDatabaseForSearchMethod(Product searchProduct) {
+		String searchNameInDatabase;
+		String productName = searchProduct.getProductName().toLowerCase();
+		
+		for (Product item : productDAO.getProductList()) {
+			SearchProductDTO searchProductDTO = new SearchProductDTO();
+			searchProductDTO.setSearchName(item.getProductName());
+			searchNameInDatabase = searchProductDTO.getSearchName().toLowerCase();
+			
+			if (searchNameInDatabase.equals(productName)) {
+				return item;
+			}
+		}
+		return null;
+	}
 }

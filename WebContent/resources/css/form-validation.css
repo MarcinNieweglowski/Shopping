@@ -49,6 +49,3 @@ input:not([type="submit"]):active + .input-requirements {
 .invalid {
 	color: red;
 }
-.inputAreaWidth {
-	width: 400px;
-}

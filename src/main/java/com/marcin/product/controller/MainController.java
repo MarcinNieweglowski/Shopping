@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.marcin.product.entity.Product;
@@ -53,11 +52,14 @@ public class MainController {
 	
 	@PostMapping("/confirmProduct")
 	public String confirmProduct(@Valid @ModelAttribute("addProduct") Product registerProduct, BindingResult result, Model theModel) {
-		boolean isValidName = productService.productDoesNotExist(registerProduct.getId(), registerProduct.getProductName());
-		if(result.hasErrors()) {
+		String productNameNotNull = registerProduct.getProductName();
+		if (productNameNotNull == null || result.hasErrors()) {
 			theModel.addAttribute("formerrors", result.getAllErrors()); // to avoid HTTP Status 500 - Internal Server Error
 			return "product-form";
-		} else if (!isValidName) {
+		}
+		
+		boolean isValidName = productService.productDoesNotExist(registerProduct.getId(), registerProduct.getProductName());
+		if (!isValidName) {
 			theModel.addAttribute("isInvalidName", "A product with this name already exists. Duplicate entries are not allowed.");
 			return "product-form";
 		} else {
@@ -85,11 +87,32 @@ public class MainController {
 		return "redirect:/showList";
 	}
 	
-	@RequestMapping("/setMaxVal")
+	@GetMapping("/setMaxVal")
 	public String setMaxStatus(@RequestParam("setMaxStatus") int theId, Model theModel) {
 		Product theProduct = productService.setMax(theId);
 		theModel.addAttribute("setMaxStatus", theProduct);
 		return "redirect:/buyList";
 	}
 	
+	@GetMapping("/searchProduct")
+	public String searchProduct(Model theModel) {
+		Product searchProduct = new Product();
+		theModel.addAttribute("requestProductName", searchProduct);
+		return "search-product";
+	}
+	
+	@PostMapping("/searchResult")
+	public String searchResult(@ModelAttribute("requestProductName") Product searchProduct, Model theModel) {
+		try {
+			boolean productNotInDatabase = productService.productDoesNotExist(searchProduct.getProductName());
+			if (productNotInDatabase) {
+				return "search-no-result-found";
+			}
+			Product theProduct = productService.findProductInDatabaseForSearchMethod(searchProduct);
+			theModel.addAttribute("requestProductName", theProduct);
+			return "search-result";
+		} catch (NullPointerException nullExc) {
+			return "redirect:/searchProduct";
+		}
+	}
 }

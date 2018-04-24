@@ -11,6 +11,7 @@
 	<title>Product Database</title>
 	<link href="<c:url value="/resources/form-validation.css" />" rel="stylesheet">
 	<link href="<c:url value="/resources/main.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/general.css" />" rel="stylesheet">
 	<link href="<c:url value="/resources/navbar.css" />" rel="stylesheet">
 	<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
  	<spring:url value="/resources/form-validation.js" var="formJS" />

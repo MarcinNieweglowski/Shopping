@@ -28,9 +28,11 @@
 
 #navitip {
 	transition: 0.8s ease;
+	text-align: center;
 }
 #navitip:hover {
 	background-color: red;
 	color: white;
+	border-radius: 15px;
 }
 

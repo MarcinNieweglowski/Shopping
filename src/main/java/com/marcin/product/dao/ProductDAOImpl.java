@@ -2,6 +2,8 @@ package com.marcin.product.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -12,22 +14,15 @@ import com.marcin.product.entity.Product;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Override
 	public List<Product> getProductList() {
-		
-		// get the current session factory
 		Session currentSession = sessionFactory.getCurrentSession();
-		
-		// query the database
 		Query<Product> query = currentSession.createQuery("from Product order by productName");
-		
-		// get the result list
 		List<Product> product = query.getResultList();
-		
 		return product;
 	}
 
@@ -49,23 +44,16 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void deleteProduct(int theId) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<Product> query = currentSession.createQuery("delete from Product where id=:deleteId");
+		Query<Product> query = currentSession.createQuery("delete from Product where id = :deleteId");
 		query.setParameter("deleteId", theId);
 		query.executeUpdate();
 	}
 
 	@Override
 	public List<Product> showBuyList() {
-		
-		// get the current session factory
 		Session currentSession = sessionFactory.getCurrentSession();
-		
-		// query the database
 		Query<Product> query = currentSession.createQuery("from Product p where p.status<p.quantityNeeded order by productName");
-		
-		// get the result list
 		List<Product> product = query.getResultList();
-		
 		return product;
 	}
 
@@ -76,5 +64,28 @@ public class ProductDAOImpl implements ProductDAO {
 		theProduct.setStatus(theProduct.getQuantityNeeded());
 		return theProduct;
 	}
-	
+
+//	@Override
+//	public Product searchProduct(String productName) {
+//		Session currentSession = sessionFactory.getCurrentSession();
+//		Product theProduct = null;
+////		try {
+//			Query<Product> query = currentSession.createQuery("from Product p where p.productName = :searchResult");
+//			query.setParameter("searchResult", productName);
+////			theProduct = currentSession.get(Product.class, productName);
+//			theProduct = query.getSingleResult();
+//			System.out.println("____________ input productName = " + productName);
+//			System.out.println(">>>> productName = " + theProduct.getProductName());
+//			System.out.println(">>>> quantityNeeded = " + theProduct.getQuantityNeeded());
+//			System.out.println(">>>> status = " + theProduct.getStatus());
+////		} catch(NoResultException exc) {
+////			
+////		}
+//		System.out.println("____________ input productName = " + productName);
+//		System.out.println(">>>> productName = " + theProduct.getProductName());
+//		System.out.println(">>>> quantityNeeded = " + theProduct.getQuantityNeeded());
+//		System.out.println(">>>> status = " + theProduct.getStatus());
+////		query.executeUpdate();
+//		return theProduct;
+//	}
 }

@@ -10,6 +10,7 @@
 				<li class="centerList">Visit <u><a href="${pageContext.request.contextPath}/showList">Show all products</a></u> to view the complete list of all products that are in the database, edit the given product or remove it completely.</li>
 				<li class="centerList">Click <u><a href="${pageContext.request.contextPath}/productForm">Add product</a></u> to create a new product instance in the database.</li>
 				<li class="centerList">To view items to buy visit <u><a href="${pageContext.request.contextPath}/buyList">Show buy-list</a></u>.</li>
+				<li class="centerList">Search for a specific product - <u><a href="${pageContext.request.contextPath}/searchProduct">Search</a></u>.</li>
 			</ul>
 		</div>
 		<br>

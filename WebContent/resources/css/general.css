@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.centerDiv, .table, .table th {
+	 text-align: center;
+}
+
+.inputAreaWidth {
+	width: 400px;
+}
+
+.maxWidth {
+	max-width: 600px;
+}
