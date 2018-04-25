@@ -9,14 +9,6 @@
 				<li class="naviButton" onclick="activeNavBtn(this)"><a href="${pageContext.request.contextPath}/productForm">Add product</a></li>
 				<li class="naviButton" onclick="activeNavBtn(this)"><a href="${pageContext.request.contextPath}/buyList">Show buy-list</a></li>
 				<li class="naviButton"><a href="${pageContext.request.contextPath}/searchProduct">Search</a></li>
-<!-- 				<li><span>Search:</span> -->
-					
-<!-- 					<form:form modelAttribute="requestProductName" action="searchResult" method="POST"> -->
-<!-- 						<input type="text" placeholder="Enter product name"> -->
-<!-- 						<button type="submit" value="Search!">Search!</button> -->
-<!-- 					</form:form> -->
-					
-<!-- 				</li> -->
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a><span id="theTime"></span></a></li>

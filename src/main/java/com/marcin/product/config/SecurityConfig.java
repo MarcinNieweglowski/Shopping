@@ -21,8 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery("select app_username as login, user_password as password, true as enabled from app_user where app_username=?")
-        .authoritiesByUsernameQuery("select app_username as login, authority as 'ROLE_USER' from app_user where app_username=?");
+			.usersByUsernameQuery("select app_username as login, user_password as password, true as enabled from app_user where app_username=?")
+			.authoritiesByUsernameQuery("select app_username as login, authority as 'ROLE_USER' from app_user where app_username=?");
 //		UserBuilder users = User.withDefaultPasswordEncoder();
 //		auth.inMemoryAuthentication()
 //		.withUser(users.username("marcin").password("pass").roles("USER"));
@@ -30,13 +30,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/","/loginForm").permitAll().and().formLogin().loginPage("/loginForm");
-//		http.authorizeRequests().anyRequest().authenticated()
-//			.and().formLogin()
-//			.loginPage("/loginForm")
-//			.loginProcessingUrl("/verifyUserData")
-//			.defaultSuccessUrl("/main")
-//			.permitAll();
+		http.authorizeRequests().antMatchers("/","/loginForm").permitAll().and().formLogin().loginPage("/loginForm");
+		http.authorizeRequests().anyRequest().authenticated()
+			.and().formLogin()
+			.loginPage("/loginForm")
+			.loginProcessingUrl("/verifyUserData")
+			.defaultSuccessUrl("/main")
+			.permitAll();
 	}
 
 	

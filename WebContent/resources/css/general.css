@@ -11,3 +11,10 @@
 .maxWidth {
 	max-width: 600px;
 }
+
+.searchButton {
+	float: left;
+/* 	display: inline-block; */
+	background-color: red;
+	color: pink;
+}

@@ -100,7 +100,7 @@ public class MainController {
 		theModel.addAttribute("requestProductName", searchProduct);
 		return "search-product";
 	}
-	
+
 	@PostMapping("/searchResult")
 	public String searchResult(@ModelAttribute("requestProductName") Product searchProduct, Model theModel) {
 		try {

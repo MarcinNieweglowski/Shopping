@@ -1,7 +1,7 @@
 <%@ include file="common/header.jsp" %>
 <%@ include file="common/navbar.jsp" %>
 	
-	<h2 align="center">Welcome User</h2>
+	<h2 class="centerDiv">Welcome User</h2>
 	<div class="desc">
 		<h6><i>Details below</i></h6>
 		<br>

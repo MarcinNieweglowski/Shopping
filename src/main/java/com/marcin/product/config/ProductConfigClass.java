@@ -100,7 +100,6 @@ public class ProductConfigClass implements WebMvcConfigurer {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
         hibernateProperties.setProperty("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
-//        hibernateProperties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
         return hibernateProperties;
     }
     /*
@@ -123,7 +122,6 @@ public class ProductConfigClass implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/js/", "/resources/css/");
-//		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/css/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
 	}
     
